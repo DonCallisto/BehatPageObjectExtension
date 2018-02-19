@@ -3,7 +3,9 @@
 namespace SensioLabs\Behat\PageObjectExtension\Context\Argument;
 
 use Behat\Behat\Context\Argument\ArgumentResolver;
+use SensioLabs\Behat\PageObjectExtension\PageObject\Element;
 use SensioLabs\Behat\PageObjectExtension\PageObject\Factory;
+use SensioLabs\Behat\PageObjectExtension\PageObject\Page;
 
 class PageObjectArgumentResolver implements ArgumentResolver
 {
@@ -55,7 +57,7 @@ class PageObjectArgumentResolver implements ArgumentResolver
      */
     private function isPage($className)
     {
-        return is_subclass_of($className, 'SensioLabs\Behat\PageObjectExtension\PageObject\Page');
+        return is_subclass_of($className, Page::class);
     }
 
     /**
@@ -65,7 +67,7 @@ class PageObjectArgumentResolver implements ArgumentResolver
      */
     private function isElement($className)
     {
-        return is_subclass_of($className, 'SensioLabs\Behat\PageObjectExtension\PageObject\Element');
+        return is_subclass_of($className, Element::class);
     }
 
     /**
@@ -85,6 +87,6 @@ class PageObjectArgumentResolver implements ArgumentResolver
      */
     private function getClassName(\ReflectionParameter $parameter)
     {
-        return $parameter->getClass() ? $parameter->getClass()->name : null;
+        return $parameter->getClass() ? $parameter->getClass()->getName() : null;
     }
 }
